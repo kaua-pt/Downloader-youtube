@@ -44,7 +44,7 @@ def transmitir(link):
         info = ydl.extract_info(obj, download=False)
 
         natural = r"C:\\Users\\PC\\Desktop\\Programas\\Pegarlinketocar" + \
-            "\\" + info['title'] + '-' + info["id"] + ".m4a"
+            "\\" + info['title'] + '-' + info["id"] + ".webm"
         destino = r"C:\\Users\\PC\\Desktop\\Musicas\\"
 
         try:
@@ -74,7 +74,6 @@ def main():
     root.title("Baixar Youtube")
     root.geometry("400x200+800+80")
     root.resizable(False, False)
-    root.iconbitmap("Downloader-youtube\images\youtube_37626.ico")
     global link
     link = StringVar()
 
