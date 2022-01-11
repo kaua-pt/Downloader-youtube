@@ -43,7 +43,7 @@ def tela():
                       text="Download",
                       font=10,
                       anchor="center",
-                      command=lambda: Procedimentos.baixar(link)).place(x=30, y=140)
+                      command=lambda: Procedimentos.baixar(link, root)).place(x=30, y=140)
 
     transmitirbt = Button(root,
                           width=10,
@@ -52,4 +52,5 @@ def tela():
                           font=10,
                           anchor="center",
                           command=lambda: Procedimentos.transmitir(link)).place(x=270, y=140)
+
     root.mainloop()

@@ -2,36 +2,36 @@ import shutil
 import youtube_dl
 import os
 from .Pick import Pick
+import tkinter
 
 
 class Procedimentos():
-    """Classe para armazenas os procedimentos realizados no app."""
+    """Classe para armazenar os procedimentos do programa."""
 
     def transmitir(link: str) -> None:
         """Função com a finalizade de transmitir o arquivo de música para a pasta padrão."""
-
         obj: str = Pick.geturl(link)
 
-        with youtube_dl.YoutubeDL() as ydl:
-            info = ydl.extract_info(obj, download=False)
+        # paths
+        natural = r"C:\\Users\\PC\\Desktop\\Programas\\Pegarlinketocar\\dist\\"
+        destino = r"C:\\Users\\PC\\Desktop\\Musicas\\"
 
-            # paths
-            natural = r"C:\Users\PC\Desktop\Programas\Pegarlinketocar\dist" + \
-                "\\" + info['title'] + '-' + info["id"] + \
-                "." + info['requested_formats'][1]['ext']
+        try:
+            os.mkdir(destino)  # se o arquivo não exitir, ele o cria
 
-            destino = r"C:\\Users\\PC\\Desktop\\Musicas\\"
+        except FileExistsError:
+            pass
 
-            try:
-                os.mkdir(destino)
-            except FileExistsError:
-                pass
+        files = os.listdir(natural)  # lista todos os arquivos em natural
 
-            # mover para a pasta destino que está na área de trabalho
-            shutil.move(natural, destino)
+        for file in files:
+            if file != "main.exe":  # como o arquivo de música vai para dist, se o arquivo não for main .exe, ele move o arquivo
+                shutil.move(natural + file, destino)
 
-    def baixar(link: str) -> None:
+    def baixar(link: str, root) -> None:
         """Procedimento para baixar a música."""
+
+        root.update()
 
         url: str = Pick.geturl(link)
         # opções para baixar em arquivo de audio
@@ -46,3 +46,5 @@ class Procedimentos():
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
+
+        root.update()
